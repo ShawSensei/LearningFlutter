@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeActivity extends StatelessWidget {
-  const HomeActivity({super.key});
+  HomeActivity({super.key});
 
   MySnackbar(message, context) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -26,7 +26,19 @@ class HomeActivity extends StatelessWidget {
       action: SnackBarAction(
         label: "PRESS",
         onPressed: () {
-          print("Press me");
+          print("Pressed me");
+        },
+      ),
+    ));
+  }
+
+  Snacky(context, msg) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(msg),
+      action: SnackBarAction(
+        label: "PRESS",
+        onPressed: () {
+          print("Pressed me");
         },
       ),
     ));
@@ -57,10 +69,49 @@ class HomeActivity extends StatelessWidget {
         });
   }
 
+  var MyItems = [
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Pahar mamu"
+    },
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Ken bro"
+    },
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Shei to"
+    },
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Keno"
+    },
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Bhallage na"
+    },
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Chole na"
+    },
+    {
+      "img":
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "title": "Kon jinish?"
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(25),
+        minimumSize: Size(double.infinity, 40),
+        padding: EdgeInsets.all(15),
         backgroundColor: Colors.purpleAccent,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
@@ -269,14 +320,64 @@ class HomeActivity extends StatelessWidget {
             ),
           ]),
         ),
-        body: Center(
-          child: ElevatedButton(
-            child: Text("Click Me"),
-            onPressed: () {
-              MyAlertDialogue(context);
-            },
-          ),
+        body: ListView.builder(
+          itemCount: MyItems.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Snacky(context, MyItems[index]['title']);
+              },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                width: double.infinity,
+                height: 500,
+                child: Image.network(
+                  MyItems[index]["img"]!,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            );
+          },
         )
+        // Column(
+        //   mainAxisAlignment: MainAxisAlignment.start,
+        //   children: [
+        //     Padding(
+        //         padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+        //         child: TextField(
+        //           decoration: InputDecoration(
+        //               labelText: "Shurur Naam", border: OutlineInputBorder()),
+        //         )),
+        //     Padding(
+        //         padding: EdgeInsets.all(10),
+        //         child: TextField(
+        //           decoration: InputDecoration(
+        //               labelText: "Shesher Naam", border: OutlineInputBorder()),
+        //         )),
+        //     Padding(
+        //         padding: EdgeInsets.all(10),
+        //         child: TextField(
+        //           decoration: InputDecoration(
+        //               labelText: "Mail Jekhane Pathay",
+        //               border: OutlineInputBorder()),
+        //         )),
+        //     Padding(
+        //         padding: EdgeInsets.all(10),
+        //         child: ElevatedButton(
+        //           onPressed: () {},
+        //           child: Text("DHUM Dabao"),
+        //           style: buttonStyle,
+        //         ))
+        //   ],
+        // )
+        // Center(
+        //   child: ElevatedButton(
+        //     child: Text("Click Me"),
+        //     onPressed: () {
+        //       MyAlertDialogue(context);
+        //     },
+        //   ),
+        // )
         // Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         //   children: [
